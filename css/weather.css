@@ -1,0 +1,78 @@
+.weather-container {
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    max-height: 50vh;
+}
+
+.weather-today {
+    grid-template-columns: 0fr 1fr 0fr;
+    grid-template-rows: auto auto auto;
+    grid-column-gap: 4px;
+    grid-row-gap: 6px;
+}
+
+.city {
+    /*grid-area: 1 / 2 / 2 / 4;*/
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.weather-type {
+/*    grid-area: 2 / 2 / 3 / 4;*/
+    width: 12rem;
+    height: 12rem;
+    object-fit: contain;
+    margin: -1rem auto;
+}
+
+.temperature {
+    grid-area: 3 / 2 / 4 / 4;
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: -1rem auto;
+}
+
+.weather-details-today {
+    grid-area: 4 / 2 / 5 / 4;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 8px;
+    margin-top: 1rem;
+    font-size: 1fr;
+}
+.details-humidity-name{
+    grid-area: 1 / 2 / 3 / 4;
+    text-align: center;
+    margin: -1rem auto;
+    max-height: 25px;
+}
+.details-humidity-data{
+    grid-area: 1 / 2 / 3 / 4;
+    text-align: center;
+    margin: -1rem;
+}
+.details-windspeed-name{
+    grid-area: 1 / 2 / 3 / 4;
+    text-align: center;
+    margin: -1rem auto;
+    max-height: 25px;
+}
+.details-windspeed-data{
+    grid-area: 1 / 2 / 3 / 4;
+    text-align: center;
+    margin: -1rem;
+}
+
+.weather-details-today div {
+    border-radius: 0.75rem;
+    padding: 0.6rem 0;
+    font-size: 0.95rem;
+}
+
+

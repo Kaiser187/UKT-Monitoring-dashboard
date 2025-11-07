@@ -1,0 +1,320 @@
+/* css/theme.css */
+:root {
+  --background-primary: rgba(43, 40, 40, 0.53);
+  --foreground-primary: rgba(43, 40, 40, 0.53);
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --foreground-primary: rgba(43, 40, 40, 0.53);
+    --foreground-primary: #fff;
+  }
+}
+
+/* css/grid-config.css */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto auto auto;
+  grid-gap: 25px;
+  padding: 0 25px 25px 25px;
+}
+.main-header {
+  grid-area: 1 / 1 / 2 / 3;
+}
+.main-weather {
+  grid-area: 2 / 1 / 3 / 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas: "city city" "icon icon" "temperature temperature" "humidity windspeed";
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.main-weather .city {
+  grid-area: city;
+}
+.main-weather .temperature {
+  grid-area: temperature;
+}
+.main-weather .icon {
+  grid-area: icon;
+}
+.main-weather .humidity {
+  grid-area: humidity;
+}
+.main-weather .windspeed {
+  grid-area: windspeed;
+}
+.main-forecast {
+  grid-area: 3 / 1 / 4 / 2;
+}
+#main-busstops {
+  grid-column: 2;
+  grid-row: 2 / 3;
+  display: grid;
+  grid-auto-rows: 1fr;
+  align-items: center;
+}
+.main-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+}
+.main-logo {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.main-time {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+/* css/header.css */
+.main-header {
+  vertical-align: middle;
+  align-items: center;
+  justify-items: center;
+  font-size: 72pt;
+}
+.header-logo {
+  display: flex;
+  justify-content: center;
+}
+.header-time {
+  justify-self: center;
+  align-self: center;
+  font-size: 1em;
+}
+.header-logo img {
+  height: 2em;
+}
+
+/* css/weather.css */
+.weather-container {
+  color: #fff;
+  font-family:
+    "Inter",
+    system-ui,
+    sans-serif;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  max-height: 50vh;
+}
+.weather-today {
+  grid-template-columns: 0fr 1fr 0fr;
+  grid-template-rows: auto auto auto;
+  grid-column-gap: 4px;
+  grid-row-gap: 6px;
+}
+.city {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.weather-type {
+  width: 12rem;
+  height: 12rem;
+  object-fit: contain;
+  margin: -1rem auto;
+}
+.temperature {
+  grid-area: 3 / 2 / 4 / 4;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin: -1rem auto;
+}
+.weather-details-today {
+  grid-area: 4 / 2 / 5 / 4;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 8px;
+  margin-top: 1rem;
+  font-size: 1fr;
+}
+.details-humidity-name {
+  grid-area: 1 / 2 / 3 / 4;
+  text-align: center;
+  margin: -1rem auto;
+  max-height: 25px;
+}
+.details-humidity-data {
+  grid-area: 1 / 2 / 3 / 4;
+  text-align: center;
+  margin: -1rem;
+}
+.details-windspeed-name {
+  grid-area: 1 / 2 / 3 / 4;
+  text-align: center;
+  margin: -1rem auto;
+  max-height: 25px;
+}
+.details-windspeed-data {
+  grid-area: 1 / 2 / 3 / 4;
+  text-align: center;
+  margin: -1rem;
+}
+.weather-details-today div {
+  border-radius: 0.75rem;
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+}
+
+/* css/forecast.css */
+.main-forecast {
+  background:
+    linear-gradient(
+      145deg,
+      #1f1f1f,
+      #292929);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.forecast-header {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding-top: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.forecast-card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1rem;
+  padding: 1rem 0;
+  gap: 1rem;
+}
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.forecast-day img {
+  width: 100px;
+  height: 100px;
+}
+.forecast-temp {
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* css/busplan.css */
+.Bus-Card {
+  background:
+    linear-gradient(
+      145deg,
+      #1f1f1f,
+      #292929);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+.Line-name {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
+}
+.bus-line-name {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+}
+.bus-line {
+  grid-column: 1;
+  grid-row: 2;
+  text-align: center;
+}
+.bus-abfahrt {
+  grid-column: 3;
+  grid-row: 2;
+  text-align: center;
+}
+.Line-description {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 2px;
+  grid-row-gap: 2px;
+  text-align: center;
+}
+h3 {
+  font-size: 1.5rem;
+}
+.Line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: 1 / 1 / 2 / 2;
+}
+.Abfahrt {
+  grid-area: 1 / 3 / 2 / 4;
+}
+
+/* css/main.css */
+:root,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  color-scheme: light dark;
+  font-family: sans-serif;
+  color: var(--foreground-primary);
+  background: var(--background-primary);
+}
+:root {
+  font-family:
+    Inter,
+    system-ui,
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:root,
+body,
+#root,
+.main-content {
+  width: 100vw;
+  height: 100vh;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+.card {
+  border: 1px solid #454545;
+  backdrop-filter: blur(5px) brightness(85%);
+  background:
+    linear-gradient(
+      145deg,
+      #1f1f1f,
+      #292929);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+/*# sourceMappingURL=main.css.map */

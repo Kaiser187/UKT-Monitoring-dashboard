@@ -1,0 +1,56 @@
+@import url('./theme.css');
+@import url('./grid-config.css');
+@import url('./header.css');
+@import url('./weather.css');
+@import url('./forecast.css');
+@import url('./busplan.css');
+
+
+:root, body, #root {
+    margin: 0;
+    padding: 0;
+
+    color-scheme: light dark;
+
+    font-family: sans-serif;
+    color: var(--foreground-primary);
+    background: var(--background-primary);
+}
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root,  body, #root, .main-content {
+    width: 100vw;
+    height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+}
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
+
+.card {
+    border: 1px solid #454545;
+    backdrop-filter: blur(5px) brightness(85%);
+
+    background: linear-gradient(145deg, #1f1f1f, #292929);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}

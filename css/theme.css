@@ -1,0 +1,11 @@
+:root {
+    --background-primary: rgba(43, 40, 40, 0.53);
+    --foreground-primary: rgba(43, 40, 40, 0.53);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --foreground-primary: rgba(43, 40, 40, 0.53);
+        --foreground-primary: #fff;
+    }
+}

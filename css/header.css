@@ -1,0 +1,26 @@
+.main-header{
+    /*background: linear-gradient(145deg, #1f1f1f, #292929);*/
+    /*border-radius: 1.5rem;*/
+    /*box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);*/
+    vertical-align: middle;
+    align-items: center;
+    justify-items: center;
+
+    font-size: 72pt;
+}
+
+.header-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.header-time {
+    justify-self: center;
+    align-self: center;
+    font-size: 1em;
+
+}
+
+.header-logo img {
+    height: 2em;
+}
