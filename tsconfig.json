@@ -1,9 +1,14 @@
 {
-    "compilerOptions": {
-      "target": "es2024",
-      "lib": ["es2024", "dom"],
-        "jsx": "react",
-      "allowSyntheticDefaultImports": true,
-      "moduleResolution": "nodenext"
-    }
+	"compilerOptions": {
+		"target": "es2024",
+		"lib": [
+			"es2024",
+			"dom"
+		],
+		"jsx": "react",
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "nodenext",
+		"outDir": "./build/ts",
+		"declarationDir": ".build/lib"
+	}
 }

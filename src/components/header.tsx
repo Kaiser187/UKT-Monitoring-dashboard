@@ -1,7 +1,7 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import GetFormatedTime from "../services/time.js"
-import UKTLogo from "../Assets/UKT-Logo-horizontal.svg"
+import UKTLogo from "../../assets/UKT-Logo-horizontal.svg"
 
 export function Logo() {
 

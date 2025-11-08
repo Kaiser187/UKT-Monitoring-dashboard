@@ -1,29 +1,29 @@
 // ☀️ & 🌙 Grundzustände
-import clearDay from "../Assets/Icons/clear-day.svg";
-import clearNight from "../Assets/Icons/clear-night.svg";
-import partlyCloudyDay from "../Assets/Icons/partly-cloudy-day.svg";
-import partlyCloudyNight from "../Assets/Icons/partly-cloudy-night.svg";
-import cloudy from "../Assets/Icons/cloudy.svg";
+import clearDay from "../../assets/icons/clear-day.svg";
+import clearNight from "../../assets/icons/clear-night.svg";
+import partlyCloudyDay from "../../assets/icons/partly-cloudy-day.svg";
+import partlyCloudyNight from "../../assets/icons/partly-cloudy-night.svg";
+import cloudy from "../../assets/icons/cloudy.svg";
 
 // 🌫 Nebel / Staub
-import fogDay from "../Assets/Icons/fog-day.svg";
-import fogNight from "../Assets/Icons/fog-night.svg";
-import dust from "../Assets/Icons/dust.svg";
-import dustWind from "../Assets/Icons/dust-wind.svg";
+import fogDay from "../../assets/icons/fog-day.svg";
+import fogNight from "../../assets/icons/fog-night.svg";
+import dust from "../../assets/icons/dust.svg";
+import dustWind from "../../assets/icons/dust-wind.svg";
 
 // 🌦 Niederschlag
-import drizzle from "../Assets/Icons/drizzle.svg";
-import rain from "../Assets/Icons/rain.svg";
-import sleet from "../Assets/Icons/sleet.svg";
+import drizzle from "../../assets/icons/drizzle.svg";
+import rain from "../../assets/icons/rain.svg";
+import sleet from "../../assets/icons/sleet.svg";
 
 // 🌨 Schnee & Eis
-import snow from "../Assets/Icons/snow.svg";
-import hail from "../Assets/Icons/hail.svg";
+import snow from "../../assets/icons/snow.svg";
+import hail from "../../assets/icons/hail.svg";
 
 // ⚡ Gewitter / Hagel / Tornado
-import thunderstorms from "../Assets/Icons/thunderstorms.svg";
-import thunderstormsRain from "../Assets/Icons/thunderstorms-rain.svg";
-import tornado from "../Assets/Icons/tornado.svg";
+import thunderstorms from "../../assets/icons/thunderstorms.svg";
+import thunderstormsRain from "../../assets/icons/thunderstorms-rain.svg";
+import tornado from "../../assets/icons/tornado.svg";
 
 
 export default function getWeatherIconPath(weather: { isDay: boolean, code: string }) {
