@@ -1,7 +1,4 @@
 .main-header{
-    /*background: linear-gradient(145deg, #1f1f1f, #292929);*/
-    /*border-radius: 1.5rem;*/
-    /*box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);*/
     vertical-align: middle;
     align-items: center;
     justify-items: center;
@@ -22,5 +19,5 @@
 }
 
 .header-logo img {
-    height: 2em;
+    height: 1.5em;
 }

@@ -1,20 +1,51 @@
-import React from 'react'
+import React, {useState, useEffect} from "react";
+import GetTimeUntilBus from "../services/untilBusTime.js";
 
 export interface BusAbfahrtenTabelleProps {
     line: string,
+    from: string,
     direction: string,
-    times: Date[]
+    times: Date[],
 }
 
 export default function BusAbfahrtenTabelle(props: BusAbfahrtenTabelleProps) {
+    const [untilTime, setTime] = useState(() => GetTimeUntilBus({ times: props.times }));
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(GetTimeUntilBus({ times: props.times }));
+        }, 1);
+        return () => clearInterval(interval);
+    }, [props.times]);
+
     return (
         <div className="card busabfahrtentabelle">
-            <h1>{props.line}</h1>
-            <p>{props.direction}</p>
-            <span>
-                {props.times.map(date =>
-                    <p>{`${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`}</p>)}
-            </span>
+            <div className="header">
+                <h1 className="direction">{props.direction}</h1>
+            </div>
+
+            <p className="abfahrten">Abfahrten:</p>
+
+            <div className="from-to-times">
+                {props.times.map((date, index) => (
+                    <div key={`${date.getTime()}-${index}`} className="row">
+                        <p className="line">
+                            {props.line}
+                        </p>
+                        <p className="from-to">
+                            {props.from} - {props.direction}
+                        </p>
+                        <p className="avrival">
+                            {untilTime}
+                        </p>
+                        <p className="times">
+                            {`${date.getHours()}:${date
+                                .getMinutes()
+                                .toString()
+                                .padStart(2, "0")}`}
+                        </p>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

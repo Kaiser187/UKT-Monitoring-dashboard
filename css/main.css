@@ -12,19 +12,15 @@
 
     color-scheme: light dark;
 
-    font-family: sans-serif;
+    font-family: 'Open Sans', sans-serif;
     color: var(--foreground-primary);
     background: var(--background-primary);
+
 }
 
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+    line-height: 1;
     font-weight: 400;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 :root,  body, #root, .main-content {
@@ -34,16 +30,6 @@
 
 * {
     box-sizing: border-box;
-}
-
-a {
-    font-weight: 500;
-    color: #646cff;
-    text-decoration: inherit;
-}
-h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
 }
 
 .card {

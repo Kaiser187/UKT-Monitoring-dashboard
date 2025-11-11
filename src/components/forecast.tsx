@@ -7,7 +7,7 @@ export default function Forecast({forecast}: { forecast: WeatherType }) {
         <div className="forecast">
             <div className="forecast-days">
                 <div className="forecast-day">
-                    <p>{`Tag: ${forecast.day}`}</p>
+                    <p>{`Tag ${forecast.day}`}</p>
                     <GetWeatherIcon weather={forecast}/>
                     <p>{forecast.temperature}C°</p>
                 </div>

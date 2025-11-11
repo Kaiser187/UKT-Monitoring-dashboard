@@ -15,7 +15,7 @@ export default function Weather({weather}: { weather: WeatherType }) {
             </div>
             <div className="humidity">
                 <div className="details-humidity-name">
-                    <p>Humidity:</p>
+                    <p>Luftfeuchtigkeit</p>
                 </div>
                 <div className="details-humidity-data">
                     <p>{weather.humidity}%</p>
@@ -23,7 +23,7 @@ export default function Weather({weather}: { weather: WeatherType }) {
             </div>
             <div className="windspeed">
                 <div className="details-windspeed-name">
-                    <p>Wind Speed:</p>
+                    <p>Windgeschwindigkeit</p>
                 </div>
                 <div className="details-windspeed-data">
                     <p>{weather.windspeed} kmh</p>

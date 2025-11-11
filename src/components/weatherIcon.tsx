@@ -4,12 +4,12 @@ import getWeatherIconPath from "../services/weatherIcons.js";
 export default function GetWeatherIcon({weather}: {weather: { isDay: boolean, code: string }}) {
     const [iconPath, setIconPath] = useState(getWeatherIconPath(weather));
     useEffect(() => {
-        setInterval(() => setIconPath(getWeatherIconPath(weather)), 1000);
+        setInterval(() => setIconPath(getWeatherIconPath(weather)), 10000);
         console.log(iconPath);
     }, []);
 
     return(
-        <img className="weather-type"
+        <img className="weather-icon"
              src={iconPath} alt={weather.code}/>
     )
 }
