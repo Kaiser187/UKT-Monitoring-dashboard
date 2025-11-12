@@ -31,9 +31,12 @@ export function App() {
                 </div>
             </div>
 
-            <div className="main-weather card">
-                <Weather weather={weather}/>
-            </div>
+            <CurrentWeatherCard />
+            {/*<div className="main-weather card">*/}
+            {/*    <Weather weather={weather}/>*/}
+            {/*</div>*/}
+
+            {/*<CurrentWeatherCard />*/}
             <div className="main-forecast card">
                 <h1 className="forecast-header">Vorhersage</h1>
                 {forecast.map(forecast => <Forecast forecast={forecast}/>)}

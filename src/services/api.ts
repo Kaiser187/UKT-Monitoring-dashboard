@@ -48,7 +48,7 @@ export abstract class Api {
 			.then(res => res.text());
 	}
 
-	async fetchJson(endpoint: string | uri | URL, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', headers: Record<string, string> = {}, body?: any): Promise<any> {
+	async fetchJson<T>(endpoint: string | uri | URL, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', headers: Record<string, string> = {}, body?: any): Promise<T> {
 		return await this.fetch(endpoint, method, Object.assign({}, headers, {
 			'content-type': 'application/json',
 			'accept': 'application/json'
@@ -88,6 +88,29 @@ export default class V1Api extends Api {
 
 		return line;
 	}
+
+	async weatherNow(): Promise<WeatherType> {
+		return await this.fetchJson<ForecastResponse>("/forecast")
+			.then(res => ({
+				day: new Date(res.time.secs_since_epoch * 1000),
+				isDay: res.response.is_day,
+				code: res.response.current.weather,
+				temperature: res.response.current.temperature,
+				humidity: res.response.current.humidity,
+				windspeed: res.response.current.wind_speed,
+				city: res.city
+			}) satisfies WeatherType)
+	}
+
+	async weatherForecast(): Promise<Forecast[]> {
+		return await this.fetchJson<ForecastResponse>("/forecast")
+			.then(res => res.response.daily.map((day, a) => ({
+				day: new Date(res.time.secs_since_epoch * 1000 + (3600 * 12 * a)),
+				isDay: true,
+				code: day.weather,
+				temperature: day.temperature,
+			}) satisfies Forecast));
+	}
 }
 
 export interface ApiVersion {
@@ -99,4 +122,42 @@ export interface LineTimes {
 	line: string,
 	direction: string,
 	arrivals: Date[]
+}
+
+export interface WeatherType {
+	isDay: boolean,
+	city: string;
+	windspeed: number;
+	humidity: number;
+	day: Date;
+	code: string;
+	temperature: number;
+}
+
+interface ForecastResponse {
+	time: { secs_since_epoch: number, nanos_since_epoch: number },
+	city: string,
+	response: {
+		is_day: boolean,
+		current: {
+			wind_speed: number,
+			precipitation: number,
+			temperature: number,
+			humidity: number,
+			weather: string,
+		},
+		daily: {
+			wind_speed: number,
+			precipitation: number,
+			temperature: number,
+			weather: string
+		}[]
+	}
+}
+
+export interface Forecast {
+	day: Date,
+	isDay: boolean,
+	code: string,
+	temperature: number
 }

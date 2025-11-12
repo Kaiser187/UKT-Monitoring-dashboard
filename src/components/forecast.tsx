@@ -1,6 +1,7 @@
 import React from "react";
+
 import GetWeatherIcon from "./weatherIcon.js";
-import {WeatherType} from "./weather.js";
+import {WeatherType} from "../services/api.js";
 
 export default function Forecast({forecast}: { forecast: WeatherType }) {
     return (

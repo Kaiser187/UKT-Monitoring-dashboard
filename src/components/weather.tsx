@@ -1,5 +1,6 @@
 import React from "react";
 import GetWeatherIcon from "./weatherIcon.js";
+import {WeatherType} from "../services/api.js";
 
 export default function Weather({weather}: { weather: WeatherType }) {
 
@@ -7,8 +8,7 @@ export default function Weather({weather}: { weather: WeatherType }) {
         <>
             <h1 className="city">{weather.city}</h1>
             <p className="temperature">
-                {weather.temperature}
-                °C
+                {weather.temperature}°C
             </p>
             <div className="icon">
                 <GetWeatherIcon weather={weather}/>
@@ -26,21 +26,9 @@ export default function Weather({weather}: { weather: WeatherType }) {
                     <p>Windgeschwindigkeit</p>
                 </div>
                 <div className="details-windspeed-data">
-                    <p>{weather.windspeed} kmh</p>
+                    <p>{weather.windspeed} km/h</p>
                 </div>
             </div>
         </>
     );
-}
-
-export interface WeatherType {
-    isDay: boolean,
-    city: string;
-    windspeed: number;
-    humidity: number;
-    day: number;
-    code: string;
-    temperature: number;
-
-
 }
