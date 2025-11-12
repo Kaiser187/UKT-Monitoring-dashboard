@@ -1,11 +1,26 @@
 :root {
-    --background-primary: rgba(43, 40, 40, 0.53);
-    --foreground-primary: #fff;
+    /* main */
+    --background-primary: #e6e5e5;        /* leicht warmes Weiß */
+    --foreground-primary: rgba(0, 0, 0, 0.8);                /* Standard-Schriftfarbe */
+    --background-secondary: rgba(255, 255, 255, 0.9);/* Panels/Karten leicht heller */
+
+    /* Card Element */
+    --border-background: #dcdcdc;                    /* feines, helles Grau */
+    --card-background: rgb(245, 245, 247);
+    --border-shadow: rgba(0, 0, 0, 0.1);
+
 }
 
 @media screen and (prefers-color-scheme: light) {
     :root {
-        --background-primary: rgb(255, 255, 255);
-        --foreground-primary: rgba(0, 0, 0, 0.53);
+        --background-primary: rgba(43, 40, 40, 0.53);
+        --foreground-primary: #fff;
+        --background-secondary: rgba(255, 255, 255, 0.7);
+
+        /*Card Element*/
+        --border-background: #454545;
+        --card-background: #1f1f1f;
+        /*--card-background: #292929;*/
+        --border-shadow: rgba(0, 0, 0, 0.4);
     }
 }

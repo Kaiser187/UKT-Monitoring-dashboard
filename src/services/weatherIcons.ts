@@ -53,6 +53,7 @@ export default function getWeatherIconPath(weather: { isDay: boolean, code: stri
             "14": fogDay,
             "15": fogDay,
             "16": fogDay,
+            "45": fogDay,
 
             // ⚡ Gewitter
             "17": thunderstorms,
