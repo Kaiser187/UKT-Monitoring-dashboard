@@ -71,7 +71,7 @@ export default class V1Api extends Api {
 			line: string,
 			direction: string,
 			expectedArrival: string
-		}[] = await this.fetchJson(`/buses?${new URLSearchParams({ limit: limit.toString() })}`)
+		}[] = await this.fetchJson<BusResponse>(`/buses?${new URLSearchParams({ limit: limit.toString() })}`)
 			.then(res => res.lines);
 
 		const line: Record<string, LineTimes> = {};
@@ -94,7 +94,7 @@ export default class V1Api extends Api {
 			.then(res => ({
 				day: new Date(res.time.secs_since_epoch * 1000),
 				isDay: res.response.is_day,
-				code: res.response.current.weather,
+				code: res.response.current.code,
 				temperature: res.response.current.temperature,
 				humidity: res.response.current.humidity,
 				windspeed: res.response.current.wind_speed,
@@ -105,9 +105,10 @@ export default class V1Api extends Api {
 	async weatherForecast(): Promise<Forecast[]> {
 		return await this.fetchJson<ForecastResponse>("/forecast")
 			.then(res => res.response.daily.map((day, a) => ({
-				day: new Date(res.time.secs_since_epoch * 1000 + (3600 * 12 * a)),
+				day: new Date(res.time.secs_since_epoch * 1000 + (3_600_000 * 24) * (a+1)),
 				isDay: true,
-				code: day.weather,
+				code: day.code,
+				weather: day.weather,
 				temperature: day.temperature,
 			}) satisfies Forecast));
 	}
@@ -118,20 +119,18 @@ export interface ApiVersion {
 	version: `${number}.${number}.${number}`
 }
 
+export interface BusResponse {
+	lines: {
+		direction: string,
+		expectedArrival: string,
+		line: string
+	}[]
+}
+
 export interface LineTimes {
 	line: string,
 	direction: string,
 	arrivals: Date[]
-}
-
-export interface WeatherType {
-	isDay: boolean,
-	city: string;
-	windspeed: number;
-	humidity: number;
-	day: Date;
-	code: string;
-	temperature: number;
 }
 
 interface ForecastResponse {
@@ -145,19 +144,32 @@ interface ForecastResponse {
 			temperature: number,
 			humidity: number,
 			weather: string,
+			code: number
 		},
 		daily: {
 			wind_speed: number,
 			precipitation: number,
 			temperature: number,
 			weather: string
+			code: number,
 		}[]
 	}
+}
+
+export interface WeatherType {
+	isDay: boolean,
+	city: string;
+	windspeed: number;
+	humidity: number;
+	day: Date;
+	code: number;
+	temperature: number;
 }
 
 export interface Forecast {
 	day: Date,
 	isDay: boolean,
-	code: string,
+	code: number,
+	weather: string,
 	temperature: number
 }

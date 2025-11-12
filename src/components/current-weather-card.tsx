@@ -1,12 +1,40 @@
-import {forecast} from "../Data.js";
-import Forecast from "./forecast.js";
 import React from "react";
 import GetWeatherIcon from "./weatherIcon.js";
+import {API} from "../main.js";
+import useRepeated from "../useRepeated.js";
+
+const degrees = new Intl.NumberFormat('de-DE', {
+	style: 'unit',
+	unit: 'degree',
+	unitDisplay: "short",
+	maximumFractionDigits: 1,
+});
+
+const percent = new Intl.NumberFormat('de-DE', {
+	style: 'unit',
+	unit: 'percent',
+	unitDisplay: 'short',
+	maximumFractionDigits: 0
+});
+
+const speed = new Intl.NumberFormat('de-DE', {
+	style: 'unit',
+	unit: 'kilometer-per-hour',
+	unitDisplay: 'short',
+	maximumFractionDigits: 0
+});
 
 export default function CurrentWeatherCard() {
-	return <h1 className="city">{weather.city}</h1>
+	const api = React.useContext(API);
+	const weather = useRepeated(() => api.weatherNow(), 60_000);
+
+	if (!weather)
+		return <span>{"Loading ..."}</span>;
+
+	return <div className={"main-weather card"}>
+		<h1 className="city">{weather.city}</h1>
 		<p className="temperature">
-			{weather.temperature}°C
+			{degrees.format(weather.temperature)}C
 		</p>
 		<div className="icon">
 			<GetWeatherIcon weather={weather}/>
@@ -16,7 +44,7 @@ export default function CurrentWeatherCard() {
 				<p>Luftfeuchtigkeit</p>
 			</div>
 			<div className="details-humidity-data">
-				<p>{weather.humidity}%</p>
+				<p>{percent.format(weather.temperature)}</p>
 			</div>
 		</div>
 		<div className="windspeed">
@@ -24,7 +52,8 @@ export default function CurrentWeatherCard() {
 				<p>Windgeschwindigkeit</p>
 			</div>
 			<div className="details-windspeed-data">
-				<p>{weather.windspeed} km/h</p>
+				<p>{speed.format(weather.windspeed)}</p>
 			</div>
 		</div>
+	</div>;
 }

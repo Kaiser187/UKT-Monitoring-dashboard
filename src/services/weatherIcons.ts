@@ -26,9 +26,9 @@ import thunderstormsRain from "../../assets/icons/thunderstorms-rain.svg";
 import tornado from "../../assets/icons/tornado.svg";
 
 
-export default function getWeatherIconPath(weather: { isDay: boolean, code: string }) {
-
+export default function getWeatherIconPath(weather: { isDay: boolean, code: number }) {
     console.log(weather);
+
     if (weather.isDay == true) {
         const weatherMap = {
             // 🌤 Klar & leicht bewölkt
@@ -133,7 +133,7 @@ export default function getWeatherIconPath(weather: { isDay: boolean, code: stri
             "94": hail,
         };
 
-        return weatherMap[weather.code] || cloudy;
+        return weatherMap[String(weather.code)] || cloudy;
 
     } else if (weather.isDay == false) {
         const weatherMap = {
@@ -239,7 +239,7 @@ export default function getWeatherIconPath(weather: { isDay: boolean, code: stri
             "94": hail,
         };
 
-        return weatherMap[weather.code] || cloudy;
+        return weatherMap[String(weather.code)] || cloudy;
     }
 
 }
