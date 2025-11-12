@@ -5,17 +5,19 @@
 	"type": "module",
 	"main": "./build/main.js",
 	"scripts": {
-		"build:dev": "esbuild src/main.tsx --bundle --sourcemap --format=esm --platform=browser --loader:.html=file --loader:.svg=file --define:DEV=true --outdir=build",
-		"build:serve": "esbuild src/main.tsx --bundle --sourcemap --format=esm --platform=browser --loader:.html=file --loader:.svg=file --define:DEV=true --outdir=build --watch --servedir=build --serve-fallback=index.html",
-		"build:prod": "tsc -p tsconfig.json && esbuild src/main.tsx --bundle --format=esm --platform=browser --loader:.html=file --loader:.svg=file --outdir=build --tree-shaking --minify"
+		"build:dev": "esbuild src/main.tsx --bundle --sourcemap --format=esm --platform=browser --loader:.html=file --loader:.svg=file --define:DEV=true --outdir=../target/www",
+		"build:serve": "esbuild src/main.tsx --bundle --sourcemap --format=esm --platform=browser --loader:.html=file --loader:.svg=file --define:DEV=true --outdir=../target/www --watch --servedir=../target/www --serve-fallback=index.html",
+		"build:prod": "tsc -p tsconfig.json && esbuild src/main.tsx --bundle --format=esm --platform=browser --loader:.html=file --loader:.svg=file --outdir=../target/www --tree-shaking --minify"
 	},
 	"devDependencies": {
 		"@types/react-dom": "^19.2.2",
+		"@types/urijs": "^1.19.26",
 		"esbuild": "^0.25.11",
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {
 		"react": "^19.2.0",
-		"react-dom": "^19.2.0"
+		"react-dom": "^19.2.0",
+		"urijs": "^1.19.11"
 	}
 }
