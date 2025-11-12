@@ -48,7 +48,7 @@ export abstract class Api {
 			.then(res => res.text());
 	}
 
-	async fetchJson(endpoint: string | uri | URL, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', headers: Record<string, string> = {}, body?: any): Promise<any> {
+	async fetchJson<T>(endpoint: string | uri | URL, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', headers: Record<string, string> = {}, body?: any): Promise<T> {
 		return await this.fetch(endpoint, method, Object.assign({}, headers, {
 			'content-type': 'application/json',
 			'accept': 'application/json'
@@ -71,7 +71,7 @@ export default class V1Api extends Api {
 			line: string,
 			direction: string,
 			expectedArrival: string
-		}[] = await this.fetchJson(`/buses?${new URLSearchParams({ limit: limit.toString() })}`)
+		}[] = await this.fetchJson<BusResponse>(`/buses?${new URLSearchParams({ limit: limit.toString() })}`)
 			.then(res => res.lines);
 
 		const line: Record<string, LineTimes> = {};
@@ -88,6 +88,30 @@ export default class V1Api extends Api {
 
 		return line;
 	}
+
+	async weatherNow(): Promise<WeatherType> {
+		return await this.fetchJson<ForecastResponse>("/forecast")
+			.then(res => ({
+				day: new Date(res.time.secs_since_epoch * 1000),
+				isDay: res.response.is_day,
+				code: res.response.current.code,
+				temperature: res.response.current.temperature,
+				humidity: res.response.current.humidity,
+				windspeed: res.response.current.wind_speed,
+				city: res.city
+			}) satisfies WeatherType)
+	}
+
+	async weatherForecast(): Promise<Forecast[]> {
+		return await this.fetchJson<ForecastResponse>("/forecast")
+			.then(res => res.response.daily.map((day, a) => ({
+				day: new Date(res.time.secs_since_epoch * 1000 + (3_600_000 * 24) * (a+1)),
+				isDay: true,
+				code: day.code,
+				weather: day.weather,
+				temperature: day.temperature,
+			}) satisfies Forecast));
+	}
 }
 
 export interface ApiVersion {
@@ -95,8 +119,57 @@ export interface ApiVersion {
 	version: `${number}.${number}.${number}`
 }
 
+export interface BusResponse {
+	lines: {
+		direction: string,
+		expectedArrival: string,
+		line: string
+	}[]
+}
+
 export interface LineTimes {
 	line: string,
 	direction: string,
 	arrivals: Date[]
+}
+
+interface ForecastResponse {
+	time: { secs_since_epoch: number, nanos_since_epoch: number },
+	city: string,
+	response: {
+		is_day: boolean,
+		current: {
+			wind_speed: number,
+			precipitation: number,
+			temperature: number,
+			humidity: number,
+			weather: string,
+			code: number
+		},
+		daily: {
+			wind_speed: number,
+			precipitation: number,
+			temperature: number,
+			weather: string
+			code: number,
+		}[]
+	}
+}
+
+export interface WeatherType {
+	isDay: boolean,
+	city: string;
+	windspeed: number;
+	humidity: number;
+	day: Date;
+	code: number;
+	temperature: number;
+}
+
+export interface Forecast {
+	day: Date,
+	isDay: boolean,
+	code: number,
+	weather: string,
+	temperature: number
 }
