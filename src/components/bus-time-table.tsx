@@ -2,7 +2,7 @@ import React from "react";
 
 import useRepeated from "../useRepeated.js";
 import {API} from "../main.js";
-import BusLine from "./bus-line.js";
+import {LineTimes} from "../services/api.js";
 
 export default function BusTimeTable() {
 	const api = React.useContext(API);
@@ -10,9 +10,41 @@ export default function BusTimeTable() {
 
 	if (buses)
 		return <section id="main-busstops">
-			{Object.entries(buses).map(([line, times]) => <BusLine busplan={times}/>)}
+			{Object.entries(buses).map(([stop, times]) => <div className="card busabfahrtentabelle">
+				<div className="header">
+					<h1 className="direction">{stop}</h1>
+				</div>
+
+				<p className="abfahrten">Abfahrten:</p>
+
+				<BusLine busplan={times}/>
+			</div>)}
 		</section>;
 	else return <span className={"loading"}>
 		{"loading..."}
 	</span>
+}
+
+function BusLine({busplan}: { busplan: LineTimes[] }) {
+    return <>
+        <div className="from-to-times">
+            {busplan.map((arrival, index) => <div key={`${arrival.expectedArrival.getTime()}-${index}`} className="row">
+                <span className={"line"}>{arrival.line}</span>
+
+                <div className={"from-to"}>{`${arrival.line} - ${arrival.direction}`}</div>
+
+                <div className={"times"}>
+                    {prettyprintDate(arrival.expectedArrival)}
+                </div>
+            </div>)}
+        </div>
+	</>
+}
+
+export function prettyprintDate(date: Date): string {
+    return new Intl.DateTimeFormat("de-DE", {
+        hour: 'numeric',
+        minute: '2-digit',
+    })
+        .format(date)
 }

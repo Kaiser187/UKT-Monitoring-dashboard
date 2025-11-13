@@ -1,5 +1,7 @@
 import uri from 'urijs';
 
+export const MAX_BUS_ENTRIES = 5;
+
 export abstract class Api {
 	readonly #baseUri: uri;
 
@@ -66,27 +68,18 @@ export default class V1Api extends Api {
 		return this.fetchJson("/version")
 	}
 
-	async buses(limit: number = 50): Promise<Record<string, LineTimes>> {
-		const buses: {
-			line: string,
-			direction: string,
-			expectedArrival: string
-		}[] = await this.fetchJson<BusResponse>(`/buses?${new URLSearchParams({ limit: limit.toString() })}`)
-			.then(res => res.lines);
-
-		const line: Record<string, LineTimes> = {};
-		for (const arrival of buses)
-			if (arrival.line in line) {
-				if (line[arrival.line].arrivals.length < 6)
-					line[arrival.line].arrivals.push(new Date(arrival.expectedArrival));
-			} else
-				line[arrival.line] = {
-					line: arrival.line,
-					direction: arrival.direction,
-					arrivals: [new Date(arrival.expectedArrival)]
-				}
-
-		return line;
+	async buses(limit: number = 50): Promise<Record<StopName, LineTimes[]>> {
+		return await this.fetchJson<BusResponse>(`/buses?${new URLSearchParams({limit: limit.toString()})}`)
+			.then(res => res.stops)
+			.then(stops => Object.fromEntries(Object.entries(stops)
+				.map(([key, value]) => [value[0].stop, value
+					.slice(0, MAX_BUS_ENTRIES)
+					.map(arrival => ({
+						direction: arrival.direction,
+						stop: arrival.stop,
+						line: arrival.line,
+						expectedArrival: new Date(arrival.expectedArrival)
+					} satisfies LineTimes))])));
 	}
 
 	async weatherNow(): Promise<WeatherType> {
@@ -106,7 +99,7 @@ export default class V1Api extends Api {
 	async weatherForecast(): Promise<Forecast[]> {
 		return await this.fetchJson<ForecastResponse>("/forecast")
 			.then(res => res.response.daily.map((day, a) => ({
-				day: new Date(res.time.secs_since_epoch * 1000 + (3_600_000 * 24) * (a+1)),
+				day: new Date(res.time.secs_since_epoch * 1000 + (3_600_000 * 24) * (a + 1)),
 				isDay: true,
 				code: day.code,
 				weather: day.weather,
@@ -121,17 +114,22 @@ export interface ApiVersion {
 }
 
 export interface BusResponse {
-	lines: {
+	stops: Record<string, {
 		direction: string,
-		expectedArrival: string,
-		line: string
-	}[]
+		line: string,
+		stop: string,
+		expectedArrival: string
+	}[]>
 }
 
+export type StopName = string;
+export type StopId = string;
+
 export interface LineTimes {
-	line: string,
 	direction: string,
-	arrivals: Date[]
+	stop: StopName,
+	line: string
+	expectedArrival: Date,
 }
 
 interface ForecastResponse {
