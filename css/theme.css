@@ -11,7 +11,7 @@
 
 }
 
-@media screen and (prefers-color-scheme: light) {
+@media screen and (prefers-color-scheme: dark) {
     :root {
         --background-primary: rgba(43, 40, 40, 0.53);
         --foreground-primary: #fff;

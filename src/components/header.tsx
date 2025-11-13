@@ -1,13 +1,18 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import GetFormatedTime from "../services/time.js"
-import UKTLogo from "../../assets/UKT-Logo-horizontal.svg"
+import UKTLogoDark from "../../assets/UKT-Logo-horizontal-black.svg"
+import UKTLogoLight from "../../assets/UKT-Logo-horizontal-white.svg"
 
 export function Logo() {
 
     return (
         <div className="header-logo">
-            <img src={UKTLogo} alt="UKT-Logo"/>
+            <picture>
+                <source srcSet={UKTLogoDark} media="(prefers-color-scheme: light)"/>
+                <source srcSet={UKTLogoLight} media="(prefers-color-scheme: dark)"/>
+                <img src={UKTLogoDark} alt="Description of what the image shows"/>
+            </picture>
         </div>
     )
 }

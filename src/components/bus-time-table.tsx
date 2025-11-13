@@ -6,7 +6,7 @@ import {LineTimes} from "../services/api.js";
 
 export default function BusTimeTable() {
 	const api = React.useContext(API);
-	const buses = useRepeated(() => api.buses(20), 60_000);
+	const buses = useRepeated(() => api.buses(20), 30_000);
 
 	if (buses)
 		return <section id="main-busstops">
@@ -31,7 +31,7 @@ function BusLine({busplan}: { busplan: LineTimes[] }) {
             {busplan.map((arrival, index) => <div key={`${arrival.expectedArrival.getTime()}-${index}`} className="row">
                 <span className={"line"}>{arrival.line}</span>
 
-                <div className={"from-to"}>{`${arrival.line} - ${arrival.direction}`}</div>
+                <div className={"from-to"}>{arrival.direction}</div>
 
                 <div className={"times"}>
                     {prettyprintDate(arrival.expectedArrival)}
