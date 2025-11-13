@@ -98,6 +98,7 @@ export default class V1Api extends Api {
 				temperature: res.response.current.temperature,
 				humidity: res.response.current.humidity,
 				windspeed: res.response.current.wind_speed,
+				weather: res.response.current.weather,
 				city: res.city
 			}) satisfies WeatherType)
 	}
@@ -163,6 +164,7 @@ export interface WeatherType {
 	humidity: number;
 	day: Date;
 	code: number;
+	weather: string;
 	temperature: number;
 }
 
