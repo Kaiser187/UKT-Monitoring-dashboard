@@ -10,9 +10,13 @@
 		"build:prod": "tsc -p tsconfig.json && esbuild src/main.tsx --bundle --format=esm --platform=browser --loader:.html=file --loader:.svg=file --outdir=../target/www --tree-shaking --minify"
 	},
 	"devDependencies": {
+		"@napi-rs/canvas": "^0.1.82",
 		"@types/react-dom": "^19.2.2",
 		"@types/urijs": "^1.19.26",
 		"esbuild": "^0.25.11",
+		"napi-webp-animation": "^0.2.1",
+		"puppeteer": "^24.30.0",
+		"sharp": "^0.34.5",
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {

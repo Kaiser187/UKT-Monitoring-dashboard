@@ -26,10 +26,7 @@ const speed = new Intl.NumberFormat('de-DE', {
 
 export default function CurrentWeatherCard() {
 	const api = React.useContext(API);
-	const weather = useRepeated(() => api.weatherNow(), 60_000);
-
-	if (!weather)
-		return <span>{"Loading ..."}</span>;
+	const weather = api.useValue(unified => unified.weather);
 
 	return <div className={"main-weather card"}>
 		<h1 className="city">{weather.city}</h1>

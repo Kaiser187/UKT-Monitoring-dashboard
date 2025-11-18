@@ -30,10 +30,7 @@ export function WeatherForecast({forecast}: { forecast: Forecast }) {
 
 export default function ForecastCard() {
 	const api = React.useContext(API);
-	const forecast = useRepeated(() => api.weatherForecast(), 60_000);
-
-	if (!forecast)
-		return <span>{"Loading..."}</span>;
+	const forecast = api.useValue(unified => unified.forecast);
 
 	return <div className="main-forecast card">
 		<h1 className="forecast-header">Vorhersage</h1>

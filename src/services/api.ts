@@ -1,4 +1,5 @@
 import uri from 'urijs';
+import React from "react";
 
 export const MAX_BUS_ENTRIES = 5;
 
@@ -68,6 +69,10 @@ export default class V1Api extends Api {
 		return this.fetchJson("/version")
 	}
 
+	async config(): Promise<Config> {
+		return this.fetchJson("/config");
+	}
+
 	async buses(limit: number = 50): Promise<Record<StopName, LineTimes[]>> {
 		return await this.fetchJson<BusResponse>(`/buses?${new URLSearchParams({limit: limit.toString()})}`)
 			.then(res => res.stops)
@@ -106,11 +111,42 @@ export default class V1Api extends Api {
 				temperature: day.temperature,
 			}) satisfies Forecast));
 	}
+
+	cached(): Unified {
+		return new Unified(this);
+	}
 }
 
 export interface ApiVersion {
 	service: "Azubitafel API",
 	version: `${number}.${number}.${number}`
+}
+
+type Milliseconds = number;
+
+export interface Config {
+	bind: {
+		socket: string
+	},
+
+	weather: {
+		latitude: number,
+		longitude: number,
+
+		forecast_days?: number,
+
+		config: any,
+
+		timezone?: string,
+	},
+
+	departure: {
+		point: string
+	}[],
+
+	app: {
+		refreshInterval: Milliseconds
+	}
 }
 
 export interface BusResponse {
@@ -172,4 +208,74 @@ export interface Forecast {
 	code: number,
 	weather: string,
 	temperature: number
+}
+
+export class Unified {
+	#api: V1Api;
+	#cache: UnifiedResponse;
+	#onChange: Array<(unified: UnifiedResponse) => any> = [];
+
+	constructor(api: V1Api) {
+		this.#api = api;
+	}
+
+	private async unified(): Promise<UnifiedResponse> {
+		return Object.fromEntries(await Promise.all([
+			this.#api.config().then(config => ['config', config]),
+			this.#api.version().then(version => ['version', version]),
+			this.#api.weatherNow().then(weather => ['weather', weather]),
+			this.#api.weatherForecast().then(forecast => ['forecast', forecast]),
+			this.#api.buses().then(buses => ['buses', buses]),
+		]))
+	}
+
+	useValue<T>(onChange: (unified: UnifiedResponse) => T): T {
+		const [state, setState] = React.useState(onChange(this.#cache));
+
+		this.#onChange.push(unified => setState(onChange(unified)));
+
+		return state;
+	}
+
+	async kickstart() {
+		await this.unified()
+			.then(unified => {
+				this.#cache = unified;
+				setInterval(async () => {
+					this.#cache = await this.unified();
+					for (const fn of this.#onChange.splice(0, this.#onChange.length))
+						fn(this.#cache);
+				}, unified.config.app.refreshInterval);
+			});
+	}
+
+	// buses(): Record<StopName, LineTimes[]> {
+	// 	return this.#cache.buses;
+	// }
+	//
+	// config(): Config {
+	// 	return this.#cache.config;
+	// }
+	//
+	// version(): ApiVersion {
+	// 	return this.#cache.version;
+	// }
+	//
+	// weatherForecast(): Forecast[] {
+	// 	return this.#cache.forecast;
+	// }
+	//
+	// weatherNow(): WeatherType {
+	// 	return this.#cache.weather;
+	// }
+
+
+}
+
+export interface UnifiedResponse {
+	config: Config,
+	version: ApiVersion,
+	weather: WeatherType,
+	forecast: Forecast[],
+	buses: Record<string, LineTimes[]>
 }

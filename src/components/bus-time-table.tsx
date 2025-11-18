@@ -3,10 +3,11 @@ import React from "react";
 import useRepeated from "../useRepeated.js";
 import {API} from "../main.js";
 import {LineTimes} from "../services/api.js";
+import {prettyprintDate} from "../services/time.js";
 
 export default function BusTimeTable() {
 	const api = React.useContext(API);
-	const buses = useRepeated(() => api.buses(20), 30_000);
+	const buses = api.useValue(unified => unified.buses);
 
 	if (buses)
 		return <section id="main-busstops">
@@ -39,12 +40,4 @@ function BusLine({busplan}: { busplan: LineTimes[] }) {
             </div>)}
         </div>
 	</>
-}
-
-export function prettyprintDate(date: Date): string {
-    return new Intl.DateTimeFormat("de-DE", {
-        hour: 'numeric',
-        minute: '2-digit',
-    })
-        .format(date)
 }
