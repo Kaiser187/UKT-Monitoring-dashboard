@@ -15,9 +15,9 @@ export function Logo() {
 }
 
 export function Time() {
-    const time = useRepeated(() => new Date(), 60_000);
+    const time = useRepeated(() => new Date(), 1_000);
 
     return <div className="header-time">
-        {prettyprintDate(time)}
+        {prettyprintDate(time, true)}
     </div>
 }
