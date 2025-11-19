@@ -18,17 +18,14 @@ await api.kickstart();
 dom.createRoot(document.querySelector("#root")!)
     .render(<API.Provider value={api}>
     <App/>
+
 </API.Provider>);
 
 export function App() {
-    return <div className="main-content">
-        <div className="main-header">
-            <div className="main-Logo">
-                <Logo/>
-            </div>
-            <div className="main-Logo">
-                <Time/>
-            </div>
+    return <div id="main-content">
+        <div id="header">
+            <Logo/>
+            <Time/>
         </div>
 
         <CurrentWeatherCard />

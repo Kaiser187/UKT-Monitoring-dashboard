@@ -1,26 +1,33 @@
 :root {
     /* main */
-    --background-primary: #e6e5e5;        /* leicht warmes Weiß */
-    --foreground-primary: rgba(0, 0, 0, 0.8);                /* Standard-Schriftfarbe */
-    --background-secondary: rgba(255, 255, 255, 0.9);/* Panels/Karten leicht heller */
+    --background-primary: #e6e5e5; /* leicht warmes Weiß */
+    --foreground-primary: rgb(46, 46, 46); /* Standard-Schriftfarbe */
+    --background-secondary: rgb(255, 255, 255); /* Panels/Karten leicht heller */
+    --foreground-secondary: rgb(64, 64, 64); /* Sekudärschriftfarbe für Akzentierte Details */
 
     /* Card Element */
-    --border-background: #dcdcdc;                    /* feines, helles Grau */
+    --border-background: #dcdcdc; /* feines, helles Grau */
     --card-background: rgb(245, 245, 247);
     --border-shadow: rgba(0, 0, 0, 0.1);
 
+    --padding-small: 3px 6px;
+    --spacing-medium: 25px;
+    --spacing-small: 12px;
+
+    --border: 1px solid var(--border-background);
+    --border-faint: 1px dotted var(--border-background);
 }
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --background-primary: rgba(43, 40, 40, 0.53);
+        --background-primary: rgb(24, 24, 24);
         --foreground-primary: #fff;
-        --background-secondary: rgba(255, 255, 255, 0.7);
+        --background-secondary: rgb(7, 7, 7);
+        --foreground-secondary: #7c7c7c;
 
         /*Card Element*/
         --border-background: #454545;
         --card-background: #1f1f1f;
-        /*--card-background: #292929;*/
         --border-shadow: rgba(0, 0, 0, 0.4);
     }
 }

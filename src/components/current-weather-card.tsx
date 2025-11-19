@@ -28,29 +28,23 @@ export default function CurrentWeatherCard() {
 	const api = React.useContext(API);
 	const weather = api.useValue(unified => unified.weather);
 
-	return <div className={"main-weather card"}>
-		<h1 className="city">{weather.city}</h1>
-		<p className="temperature">
-			{degrees.format(weather.temperature)}C
-		</p>
+	return <div id="weather" className={"card"}>
+		<h1 className="city">{weather.city || "Tübingen"}</h1>
+
+		<span className="temperature">{degrees.format(weather.temperature)}C</span>
+
 		<div className="icon">
 			<GetWeatherIcon weather={weather}/>
 		</div>
-		<div className="humidity">
-			<div className="details-humidity-name">
-				<p>Luftfeuchtigkeit</p>
-			</div>
-			<div className="details-humidity-data">
-				<p>{percent.format(weather.temperature)}</p>
-			</div>
+
+		<div className="humidity stat">
+			<h2 className="details-humidity-name">{'Luftfeuchtigkeit'}</h2>
+			<span>{percent.format(weather.temperature)}</span>
 		</div>
-		<div className="windspeed">
-			<div className="details-windspeed-name">
-				<p>Windgeschwindigkeit</p>
-			</div>
-			<div className="details-windspeed-data">
-				<p>{speed.format(weather.windspeed)}</p>
-			</div>
+
+		<div className="windspeed stat">
+			<h2 className="details-windspeed-name">{'Windgeschwindigkeit'}</h2>
+			<span>{speed.format(weather.windspeed)}</span>
 		</div>
 	</div>;
 }

@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+img, svg, picture {
+    width: 100%;
+    max-height: fit-content;
+}
+
+picture img {
+    height: 100%;
+    max-height: fit-content;
+}
+
+.card {
+    border: 1px solid var(--border-background);
+
+    background: var(--card-background);
+    /*linear-gradient(145deg, var(--border-grading-min), var(--border-grading-max))*/
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px var(--border-shadow);
+
+    padding: var(--spacing-medium);
+}
+
+img.weather-icon {
+    max-height: 256px;
+    padding: var(--spacing-small);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-block: 0.5em;
+}

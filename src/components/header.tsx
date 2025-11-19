@@ -5,7 +5,7 @@ import UKTLogoLight from "../../assets/UKT-Logo-horizontal-white.svg"
 import useRepeated from "../useRepeated.js";
 
 export function Logo() {
-    return <div className="header-logo">
+    return <div id="logo">
         <picture>
             <source srcSet={UKTLogoDark} media="(prefers-color-scheme: light)"/>
             <source srcSet={UKTLogoLight} media="(prefers-color-scheme: dark)"/>
@@ -17,7 +17,7 @@ export function Logo() {
 export function Time() {
     const time = useRepeated(() => new Date(), 1_000);
 
-    return <div className="header-time">
+    return <h1 id="time">
         {prettyprintDate(time, true)}
-    </div>
+    </h1>
 }

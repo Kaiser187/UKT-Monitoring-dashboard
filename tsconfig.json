@@ -11,6 +11,7 @@
 		"module": "nodenext",
 		"outDir": "../target/www/ts",
 		"declarationDir": "../target/www/lib",
-		"declaration": true
-	}
+		"declaration": true,
+	},
+	"exclude": ["rasterise.ts"]
 }

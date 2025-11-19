@@ -1,58 +1,63 @@
-.weather-container {
-}
+#weather {
+    grid-area: weather;
 
-.weather-today {
-    grid-template-columns: 0fr 1fr 0fr;
-    grid-template-rows: auto auto auto;
-    grid-column-gap: 4px;
-    grid-row-gap: 6px;
-}
+    display: grid;
 
-.city {
+    grid-template-columns: subgrid;
+    grid-template-rows: repeat(5, auto);
+
+    grid-template-areas:
+        "city     city"
+        "icon     icon"
+        "temp     temp"
+        "humidity windspeed"
+        "humidity windspeed";
+
+    align-items: center;
+    justify-items: center;
+    /*grid-gap: var(--spacing-small);*/
+
+    box-sizing: border-box;
+
     text-align: center;
-    margin-bottom: -1em;
 }
 
-.weather-icon {
-    width: 14rem;
-    height: 14rem;
-    object-fit: contain;
-    margin: -1rem auto;
+#weather .city { grid-area: city; }
+#weather .temperature { grid-area: temp; }
+#weather .icon { grid-area: icon; }
+#weather .humidity { grid-area: humidity; }
+#weather .windspeed { grid-area: windspeed; }
+
+.stat {
+    display: grid;
+
+    grid-template-rows: subgrid;
+    grid-template-columns: subgrid;
+
+    align-content: center;
+    align-items: center;
+
+    grid-template-areas:
+        "value"
+        "label"
 }
 
 .temperature {
-    text-align: center;
-    margin: -1rem auto;
+    font-size: 65pt;
+    font-weight: bold;
+    margin-block: 0.25em;
 }
 
-.weather-details-today {
-    grid-area: 4 / 2 / 5 / 4;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    margin-top: 1rem;
-}
-.details-humidity-name{
-    grid-area: 1 / 2 / 3 / 4;
-    text-align: center;
-    margin: -1rem auto;
-    max-height: 25px;
-}
-.details-humidity-data{
-    grid-area: 1 / 2 / 3 / 4;
-    text-align: center;
-    margin: -1rem;
-}
-.details-windspeed-name{
-    grid-area: 1 / 2 / 3 / 4;
-    text-align: center;
-    margin: -1rem auto;
-    max-height: 25px;
-}
-.details-windspeed-data{
-    grid-area: 1 / 2 / 3 / 4;
-    text-align: center;
-    margin: -1rem;
-}
+.stat h2 {
+    grid-area: label;
 
+    color: var(--foreground-secondary);
+    font-weight: 500;
+    font-size: 15pt;
+}
+.stat span {
+    grid-area: value;
 
+    font-size: 32pt;
+    font-weight: bold;
+}

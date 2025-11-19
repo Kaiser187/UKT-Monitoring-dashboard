@@ -17,23 +17,21 @@ const date = new Intl.DateTimeFormat('de-DE', {
 });
 
 export function WeatherForecast({forecast}: { forecast: Forecast }) {
-    return <div className="forecast">
-        <div className="forecast-days">
-            <div className="forecast-day">
-                <p>{date.format(forecast.day)}</p>
-                <GetWeatherIcon weather={forecast}/>
-                <p>{degrees.format(forecast.temperature)}C</p>
-            </div>
-        </div>
-    </div>;
+    return <div className="forecast-day">
+		<span className="forecast-day-label">{date.format(forecast.day)}</span>
+		<GetWeatherIcon weather={forecast}/>
+		<span className="temperature">{degrees.format(forecast.temperature)}C</span>
+	</div>;
 }
 
 export default function ForecastCard() {
 	const api = React.useContext(API);
 	const forecast = api.useValue(unified => unified.forecast);
 
-	return <div className="main-forecast card">
-		<h1 className="forecast-header">Vorhersage</h1>
-		{forecast.map(forecast => <WeatherForecast forecast={forecast}/>)}
+	return <div id="forecast" className="card">
+		<h1 className="forecast-header">{"Vorhersage"}</h1>
+		<div id="forecast-days">
+			{forecast.map(forecast => <WeatherForecast forecast={forecast}/>)}
+		</div>
 	</div>
 }
