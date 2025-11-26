@@ -9,7 +9,8 @@ import URI from "urijs";
 import BusTimeTable from "./components/bus-time-table.js";
 import CurrentWeatherCard from "./components/current-weather-card.js";
 
-const api = new Unified(new V1Api(new URI(window.location.toString())
+const base = window.localStorage.getItem("API_BASE") ||window.location.toString();
+const api = new Unified(new V1Api(new URI(base)
     .path("/api/v1")));
 export const API = React.createContext(api);
 
