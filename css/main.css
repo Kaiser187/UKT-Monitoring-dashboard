@@ -16,6 +16,8 @@
     font-family: 'Montserrat', sans-serif;
     color: var(--foreground-primary);
     background: var(--background-primary);
+
+    cursor: url("/invisible-cursor.png"), hidden;
 }
 
 :root {

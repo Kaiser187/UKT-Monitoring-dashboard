@@ -39,7 +39,7 @@ export default function CurrentWeatherCard() {
 
 		<div className="humidity stat">
 			<h2 className="details-humidity-name">{'Luftfeuchtigkeit'}</h2>
-			<span>{percent.format(weather.temperature)}</span>
+			<span>{percent.format(weather.humidity)}</span>
 		</div>
 
 		<div className="windspeed stat">
