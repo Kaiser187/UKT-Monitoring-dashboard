@@ -5,9 +5,9 @@
 	"type": "module",
 	"main": "./build/main.js",
 	"scripts": {
-		"build:dev": "esbuild src/main.tsx --bundle --sourcemap --format=esm --platform=browser --loader:.html=file --loader:.svg=file --define:DEV=true --outdir=../target/www",
-		"build:serve": "esbuild src/main.tsx --bundle --sourcemap --format=esm --platform=browser --loader:.html=file --loader:.svg=file --define:DEV=true --outdir=../target/www --watch --servedir=../target/www --serve-fallback=index.html",
-		"build:prod": "tsc -p tsconfig.json && esbuild src/main.tsx --bundle --format=esm --platform=browser --loader:.html=file --loader:.svg=file --outdir=../target/www --tree-shaking --minify"
+		"build:dev": "esbuild src/main.tsx --bundle --sourcemap --format=esm --platform=browser --loader:.html=file --loader:.svg=file --loader:.png=file --define:DEV=true --outdir=../target/www",
+		"build:serve": "esbuild src/main.tsx --bundle --sourcemap --format=esm --platform=browser --loader:.html=file --loader:.svg=file --loader:.png=file --define:DEV=true --outdir=../target/www --watch --servedir=../target/www --serve-fallback=index.html",
+		"build:prod": "tsc -p tsconfig.json && esbuild src/main.tsx --bundle --format=esm --platform=browser --loader:.html=file --loader:.svg=file --loader:.png=file --outdir=../target/www --tree-shaking --minify"
 	},
 	"devDependencies": {
 		"@napi-rs/canvas": "^0.1.82",
