@@ -29,7 +29,7 @@ export default function CurrentWeatherCard() {
 	const weather = api.useValue(unified => unified.weather);
 
 	return <div id="weather" className={"card"}>
-		<h1 className="city">{weather.city || "Tübingen"}</h1>
+		<h1 className="city">{weather.city}</h1>
 
 		<span className="temperature">{degrees.format(weather.temperature)}C</span>
 
