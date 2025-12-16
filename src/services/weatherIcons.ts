@@ -27,8 +27,6 @@ import tornado from "../../assets/icons/static/tornado.svg";
 
 
 export default function getWeatherIconPath(weather: { isDay: boolean, code: number }) {
-    console.log(weather);
-
     if (weather.isDay == true) {
         const weatherMap = {
             // 🌤 Klar & leicht bewölkt

@@ -145,7 +145,8 @@ export interface Config {
 	}[],
 
 	app: {
-		refreshInterval: Milliseconds
+		refreshInterval: Milliseconds,
+		colourScheme: "Inherit" | "Weather" | "Light" | "Dark"
 	}
 }
 
@@ -239,6 +240,10 @@ export class Unified {
 		this.#onChange.push(unified => setState(onChange(unified)));
 
 		return state;
+	}
+
+	onChange(handler: (unified: UnifiedResponse) => void) {
+		this.#onChange.push(unified => handler(unified));
 	}
 
 	async kickstart() {

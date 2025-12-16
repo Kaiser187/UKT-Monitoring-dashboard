@@ -18,16 +18,14 @@
     --border-faint: 1px dotted var(--border-background);
 }
 
-@media screen and (prefers-color-scheme: dark) {
-    :root {
-        --background-primary: rgb(24, 24, 24);
-        --foreground-primary: #fff;
-        --background-secondary: rgb(7, 7, 7);
-        --foreground-secondary: #7c7c7c;
+:root.dark {
+    --background-primary: rgb(24, 24, 24);
+    --foreground-primary: #fff;
+    --background-secondary: rgb(7, 7, 7);
+    --foreground-secondary: #7c7c7c;
 
-        /*Card Element*/
-        --border-background: #454545;
-        --card-background: #1f1f1f;
-        --border-shadow: rgba(0, 0, 0, 0.4);
-    }
+    /*Card Element*/
+    --border-background: #454545;
+    --card-background: #1f1f1f;
+    --border-shadow: rgba(0, 0, 0, 0.4);
 }

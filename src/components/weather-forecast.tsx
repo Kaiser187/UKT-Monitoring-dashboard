@@ -31,7 +31,7 @@ export default function ForecastCard() {
 	return <div id="forecast" className="card">
 		<h1 className="forecast-header">{"Vorhersage"}</h1>
 		<div id="forecast-days">
-			{forecast.map(forecast => <WeatherForecast forecast={forecast}/>)}
+			{forecast.map(forecast => <WeatherForecast forecast={forecast} key={`forecast-day-${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][forecast.day.getDay()]}`}/>)}
 		</div>
 	</div>
 }
