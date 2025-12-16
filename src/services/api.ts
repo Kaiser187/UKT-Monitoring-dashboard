@@ -88,22 +88,22 @@ export default class V1Api extends Api {
 	}
 
 	async weatherNow(): Promise<WeatherType> {
-		return await this.fetchJson<ForecastResponse>("/forecast")
+		return await this.fetchJson<CurrentResponse>("/current")
 			.then(res => ({
 				day: new Date(res.time.secs_since_epoch * 1000),
-				isDay: res.response.is_day,
-				code: res.response.current.code,
-				temperature: res.response.current.temperature,
-				humidity: res.response.current.humidity,
-				windspeed: res.response.current.wind_speed,
-				weather: res.response.current.weather,
+				isDay: res.is_day,
+				code: res.current.code,
+				temperature: res.current.temperature,
+				humidity: res.current.humidity,
+				windspeed: res.current.wind_speed,
+				weather: res.current.weather,
 				city: res.city
 			}) satisfies WeatherType)
 	}
 
 	async weatherForecast(): Promise<Forecast[]> {
 		return await this.fetchJson<ForecastResponse>("/forecast")
-			.then(res => res.response.daily.map((day, a) => ({
+			.then(res => res.forecast.map((day, a) => ({
 				day: new Date(res.time.secs_since_epoch * 1000 + (3_600_000 * 24) * (a + 1)),
 				isDay: true,
 				code: day.code,
@@ -171,23 +171,27 @@ export interface LineTimes {
 interface ForecastResponse {
 	time: { secs_since_epoch: number, nanos_since_epoch: number },
 	city: string,
-	response: {
-		is_day: boolean,
-		current: {
-			wind_speed: number,
-			precipitation: number,
-			temperature: number,
-			humidity: number,
-			weather: string,
-			code: number
-		},
-		daily: {
-			wind_speed: number,
-			precipitation: number,
-			temperature: number,
-			weather: string
-			code: number,
-		}[]
+	is_day: boolean,
+	forecast: {
+		wind_speed: number,
+		precipitation: number,
+		temperature: number,
+		weather: string
+		code: number,
+	}[]
+}
+
+interface CurrentResponse {
+	time: { secs_since_epoch: number, nanos_since_epoch: number },
+	city: string,
+	is_day: boolean,
+	current: {
+		wind_speed: number,
+		precipitation: number,
+		temperature: number,
+		humidity: number,
+		weather: string,
+		code: number
 	}
 }
 
