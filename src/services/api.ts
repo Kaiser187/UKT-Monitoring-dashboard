@@ -252,28 +252,6 @@ export class Unified {
 				}, unified.config.app.refreshInterval);
 			});
 	}
-
-	// buses(): Record<StopName, LineTimes[]> {
-	// 	return this.#cache.buses;
-	// }
-	//
-	// config(): Config {
-	// 	return this.#cache.config;
-	// }
-	//
-	// version(): ApiVersion {
-	// 	return this.#cache.version;
-	// }
-	//
-	// weatherForecast(): Forecast[] {
-	// 	return this.#cache.forecast;
-	// }
-	//
-	// weatherNow(): WeatherType {
-	// 	return this.#cache.weather;
-	// }
-
-
 }
 
 export interface UnifiedResponse {
