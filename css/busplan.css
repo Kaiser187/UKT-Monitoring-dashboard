@@ -74,11 +74,13 @@
 .stop .from-to-times .line {
     grid-column: 1;
     font-weight: bold;
+    font-variant-numeric: tabular-nums;
 }
 .stop .from-to-times .from-to { grid-column: 2; }
 .stop .from-to-times .times {
     grid-column: 3;
     text-align: end;
+    font-variant-numeric: tabular-nums;
 }
 .stop .from-to-times :is(.line, .from-to, .times) {
     font-size: 0.9em;
